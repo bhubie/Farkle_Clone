@@ -17,6 +17,7 @@ class GamesController < ApplicationController
             render :edit
           else
             render :new
+          end
   end
   
   #GET Game
@@ -116,7 +117,7 @@ class GamesController < ApplicationController
   end
   
   def reset_dice(x)
-    #reset dice and dice_held
+    #reset dice and dice_held in the database
     x.update_attribute(:dice1, nil)
     x.update_attribute(:dice2, nil)
     x.update_attribute(:dice3, nil)
@@ -230,5 +231,4 @@ class GamesController < ApplicationController
     
   end
   
-
 end
