@@ -1,0 +1,84 @@
+
+<div class= "container">
+<p class = "span12"> 
+	<div class= "text-center">
+	<strong>Dice Values</strong> 
+	</div>
+</p>
+
+<div class= "row">
+<p>
+	<div class= "span2"><%= @game.dice1%></div>
+	<div class= "span2"><%= @game.dice2%></div>
+	<div class= "span2"><%= @game.dice3%></div>
+	<div class= "span2"><%= @game.dice4%></div>
+	<div class= "span2"><%= @game.dice5%></div>
+	<div class= "span2"><%= @game.dice6%></div>
+</p>
+</div>
+<%= form_for(@game) do |g|%>
+<div class= "row">
+	
+	<div class= "span2">
+		<% if @game.D1_held == true %>
+			<%= check_box_tag :D1_held, true, true, :disabled => true %>
+		<% else %>
+			<%= g.check_box :D1_held, {}, true, false %>
+		<% end %>
+	</div>
+	<div class= "span2">
+		<% if @game.D2_held == true %>
+			<%= check_box_tag :D2_held, true, true, :disabled => true %>
+		<% else %>
+			<%= g.check_box :D2_held, {}, true, false %>
+		<% end %>
+	</div>	
+	<div class= "span2">
+		<% if @game.D3_held == true %>
+			<%= check_box_tag :D3_held, true, true, :disabled => true %>
+		<% else %>
+			<%= g.check_box :D3_held, {}, true, false %>
+		<% end %>
+	</div>
+	<div class= "span2">
+		<% if @game.D4_held == true %>
+			<%= check_box_tag :D4_held, true, true, :disabled => true %>
+		<% else %>
+			<%= g.check_box :D4_held, {}, true, false %>
+		<% end %>
+	</div>
+	<div class= "span2">
+		<% if @game.D5_held == true %>
+			<%= check_box_tag :D5_held, true, true, :disabled => true %>
+		<% else %>
+			<%= g.check_box :D5_held, {}, true, false %>
+		<% end %>
+	</div>
+	<div class= "span2">
+		<% if @game.D6_held == true %>
+			<%= check_box_tag :D6_held, true, true, :disabled => true %>
+		<% else %>
+			<%= g.check_box :D6_held, {}, true, false %>
+		<% end %>
+	</div>
+
+</div>
+
+<div class = "span5"></div>
+<p><%= g.submit "Roll Dice" %><%= g.submit "End Turn"%></p>
+
+
+
+<p><h1>Round Score <%= @game.temp_score%></h1></p>
+<p><h1>Player 1 score: <%= @game.p1_score %></h1></p>
+<p><h1>Player 2 score: <%= @game.p2_score%></h1></p>
+<p><h1>Rolls Left: <%= 7 - controller.rolls_left %></h1></p>
+
+<%= @game.player1 %> </br>
+<%= @game.player2 %>
+
+<% end %>
+
+</div>
+
+

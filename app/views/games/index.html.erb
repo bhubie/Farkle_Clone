@@ -1,0 +1,16 @@
+<div class= "container">
+	<div class= "span12">
+		"Welcome to Frakle, a Farkle board game clone written in rails"
+	</br>
+	
+		<%= form_for(@game) do |g| %>
+		<%= g.submit "click here to start a new Frakle Game!" %>
+		
+		
+		<p>Already have an open game? Search for it below:</p>
+		<%= g.text_field :id %>
+		<%= g.submit "Search" %>
+		
+		<%end%>
+	</div>
+</div>
