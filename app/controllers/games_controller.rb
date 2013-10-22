@@ -1,10 +1,8 @@
 class GamesController < ApplicationController
  
-  $turn_count = 1
-  
   #GET new Game
-  
   def index
+    
   end
   def new
     @game = Game.new
@@ -30,17 +28,36 @@ class GamesController < ApplicationController
     @game = Game.find(params[:id])
     
      #checks to see if the value passed by the submit button was to roll the dice, or to end the turn
-     if params[:commit] == 'Roll Dice'
-          turn(@game)
-      elsif params[:commit] == 'End Turn'
+     case 
+     when params[:commit] == 'Roll Dice'
+          
+          (@game)
+          render :edit
+          
+     when params[:commit] == 'End Turn'
           end_turn(@game)
-      end
-   
+          render :edit
+          
+     when end_game(@game) == true
+        if @game.player1 == true
+          flash[:success] = "Congratulations Player 1, you are the winnder"
+        else
+          flash[:success] = "Congratulations Player 2, you are the winnder"
+        end
+       
+       redirect_to :root
+     end
   end
   
-
-  
-  def turn(x)
+ ###################################
+ ## Additional controller methods ##
+ ## For Turn Logic                ##
+ ## try and move somewhere else?  ##
+ ###################################
+   $turn_count = 1
+ 
+      
+ def turn(x)
       #roll dice for 6 turns then switch
     if $turn_count <= 6
       if x.update_attributes(params[:game])
@@ -70,7 +87,7 @@ class GamesController < ApplicationController
         
         $turn_count += 1
         scoring(x)
-        render :edit
+        
       end
    else 
      #if turn is up switch turn to the next player & update score
@@ -103,7 +120,6 @@ class GamesController < ApplicationController
       x.update_attribute(:p1_score, current_score+temp1_score)
       reset_dice(x)
       turn_count_reset
-      render :edit
     else
       x.update_attribute(:player2, false)
       x.update_attribute(:player1, true)
@@ -112,7 +128,6 @@ class GamesController < ApplicationController
       x.update_attribute(:p2_score, current_score+temp2_score)
       reset_dice(x)
       turn_count_reset
-      render :edit
     end
   end
   
@@ -226,9 +241,15 @@ class GamesController < ApplicationController
 
   
   def end_game(x)
+    #End game method that checks to see if score is greater than 10000
+    if x.p1_score >= 10000
+      return true
     
-    
+    elsif x.p2_score >= 10000
+      return true 
+    else
+      return false
+    end
     
   end
-  
 end

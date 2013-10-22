@@ -72,7 +72,7 @@
 <p><h1>Round Score <%= @game.temp_score%></h1></p>
 <p><h1>Player 1 score: <%= @game.p1_score %></h1></p>
 <p><h1>Player 2 score: <%= @game.p2_score%></h1></p>
-<p><h1>Rolls Left: <%= 7 - controller.rolls_left %></h1></p>
+<p><h1>Rolls Left: <%= 7 - @game.rolls_left %></h1></p>
 
 <%= @game.player1 %> </br>
 <%= @game.player2 %>
